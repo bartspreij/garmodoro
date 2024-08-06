@@ -1,0 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+  "name": "Garmodoro Dev",
+  "dockerFile": "Dockerfile",
+  "workspaceFolder": "/app",
+  "containerEnv": {
+    "DISPLAY": "unix:0"
+  },
+"mounts": [
+  "source=/home/bart/.garmin/secrets,target=/certificate,type=bind",
+  "source=/home/bart/Development/garmin/garmodoro,target=/app,type=bind",
+  "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+],
+  "runArgs": [
+    "--privileged",
+    "--env=DISPLAY",
+        "--env=QT_X11_NO_MITSHM=1"
+  ],
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Uncomment the next line to run commands after the container is created.
+  "postCreateCommand": "echo 'Dev container setup complete.'",
+
+  // Configure tool-specific properties.
+  // "customizations": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Garmin.monkey-c",
+        "ms-vscode.makefile-tools",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+
+  // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "devcontainer"
+}

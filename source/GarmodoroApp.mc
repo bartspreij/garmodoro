@@ -13,7 +13,6 @@ class GarmodoroApp extends App.AppBase {
 	}
 
 	function onStop(state) {
-		tickTimer.stop();
 		timer.stop();
 	}
 

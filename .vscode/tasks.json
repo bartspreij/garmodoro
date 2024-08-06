@@ -1,0 +1,55 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Test Connect IQ App",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-v",
+        "/home/bart/Development/garmin/garmodoro:/app",
+        "-w",
+        "/app",
+        "-v",
+        "/home/bart/.garmin/secrets:/certificate",
+        "adamjakab/connectiq-builder-sdk-v7.2.1:latest",
+        "/scripts/test.sh",
+        "--device=venu3",
+        "--certificate-path=/certificate/developer_key"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+
+    {
+      "label": "Build Connect Iq App",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-v",
+        "/home/bart/Development/garmin/garmodoro:/_build_",
+        "-v",
+        "/home/bart/.garmin/secrets:/certificate",
+        "-w",
+        "/_build_",
+        "adamjakab/connectiq-builder-sdk-v7.2.1:latest",
+        "/scripts/test.sh",
+        "--type-check-level=2",
+        "--certificate-path=/certificate/developer_key",
+        "--package-name=garmodoro_v1.2.3.iq"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
